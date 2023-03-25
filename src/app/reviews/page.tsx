@@ -1,24 +1,30 @@
-import styles from "../page.module.css";
+import { getAllReviews } from "../api/reviews/reviewStore";
 
-import reviews from "./reviews";
-import { MovieReviewCard } from "./MovieReviewCard";
 import Link from "next/link";
+import { MovieReviewCard } from "./MovieReviewCard";
 
 export default function Reviews() {
+  const reviews = getAllReviews();
+
   return (
-    <main className={styles.main}>
-      <h2>This is a movie review page</h2>
-      <div className={styles.grid}>
+    <main className="container">
+      <h1>Movie Reviews</h1>
+      <div>
+        <Link href={"/reviews/new"}>Create a new review!</Link>
+      </div>
+      <div className="row row-cols-md-4">
         {reviews.map((review) => (
-          <Link className={styles.card} href={`/reviews/${review.reviewId}`}>
-            <MovieReviewCard
-              title={review.title}
-              description={review.shortDescription}
-              releaseDate={review.releaseDate}
-              imageUrl={review.imageUrl}
-              numberOfStars={review.numberOfStars}
-            />
-          </Link>
+          <div className="col">
+            <Link key={review.reviewId} href={`/reviews/${review.reviewId}`}>
+              <MovieReviewCard
+                title={review.title}
+                description={review.shortDescription}
+                releaseDate={review.releaseDate}
+                imageUrl={review.imageUrl}
+                numberOfStars={review.starRating}
+              />
+            </Link>
+          </div>
         ))}
       </div>
     </main>
