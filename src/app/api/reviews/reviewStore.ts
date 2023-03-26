@@ -68,7 +68,12 @@ class ReviewStore {
 const _reviewStore = new ReviewStore();
 
 export function getReviewById(reviewId: string) {
-  return _reviewStore.reviews.find((r) => r.reviewId === reviewId);
+  const result = _reviewStore.reviews.find((r) => r.reviewId === reviewId);
+  if (!result) {
+    throw Error(`Review not found for id ${reviewId}`);
+  } else {
+    return result;
+  }
 }
 
 export function getReviewsForMovieId(movieId: string) {
@@ -102,6 +107,14 @@ export function addReview(
     imageUrl,
   };
   _reviewStore.reviews.push(newReview);
+}
+
+export function updateReviewById(review: Review) {
+  const reviewIndex = _reviewStore.reviews.findIndex(
+    (r) => r.reviewId === review.reviewId
+  );
+  _reviewStore.reviews[reviewIndex] = review;
+  console.log("review store is now:", _reviewStore.reviews);
 }
 
 export async function GET(request: Request) {

@@ -12,7 +12,7 @@ export default function Reviews() {
       <div>
         <Link href={"/reviews/new"}>Create a new review!</Link>
       </div>
-      <div className="row row-cols-md-4">
+      <div className="row row-cols-md-3">
         {reviews.map((review) => (
           <div className="col">
             <Link key={review.reviewId} href={`/reviews/${review.reviewId}`}>

@@ -1,7 +1,7 @@
 import { MovieReview } from "./MovieReview";
 // import reviews from "../reviews";
 
-import { getReviewById } from "../../api/reviews/reviewStore";
+import { Review, getReviewById } from "../../api/reviews/reviewStore";
 import { getReviewerById } from "@/app/api/reviewers/reviewersStore";
 
 type ReviewPageProps = {
@@ -25,7 +25,7 @@ function ReviewPage({ params: { id } }: ReviewPageProps) {
       reviewText={review.reviewText}
       releaseDate={review.releaseDate}
       shortDescription={review.shortDescription}
-      imageUrl={""}
+      imageUrl={review.imageUrl}
       numberOfStars={review.starRating}
       reviewerName={reviewerName}
       reviewId={id}

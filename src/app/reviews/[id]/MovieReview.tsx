@@ -29,6 +29,7 @@ function MovieReview({
       <p>This film has {numberOfStars} stars!</p>
       <p>Reviewed by {reviewerName}</p>
       <Link href={`/reviews/edit/${reviewId}`}>Edit this review</Link>
+      <Link href={`/reviews`}>Back to all reviews</Link>
     </div>
   );
 }
