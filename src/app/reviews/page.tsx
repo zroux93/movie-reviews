@@ -14,8 +14,8 @@ export default function Reviews() {
       </div>
       <div className="row row-cols-md-3">
         {reviews.map((review) => (
-          <div className="col">
-            <Link key={review.reviewId} href={`/reviews/${review.reviewId}`}>
+          <div key={review.reviewId} className="col">
+            <Link href={`/reviews/${review.reviewId}`}>
               <MovieReviewCard
                 title={review.title}
                 description={review.shortDescription}

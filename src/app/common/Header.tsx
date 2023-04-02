@@ -21,8 +21,9 @@ export default function Header({ additionalLinks }: HeaderProps) {
         </Link>
         {additionalLinks && (
           <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            {additionalLinks.map((l) => (
+            {additionalLinks.map((l, index) => (
               <Link
+                key={index}
                 href={l.href}
                 className="me-3 py-2 link-body-emphasis text-decoration-none"
               >

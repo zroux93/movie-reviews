@@ -1,17 +1,17 @@
-import { MovieReview } from "./MovieReview";
-// import reviews from "../reviews";
+import { Suspense } from "react";
 
-import { Review, getReviewById } from "../../api/reviews/reviewStore";
+import { Review } from "@/app/api/reviews/reviewStore";
 import { getReviewerById } from "@/app/api/reviewers/reviewersStore";
+import { getReviewById } from "@/app/api/reviews/reviewApi";
+
+import { MovieReview } from "./MovieReview";
 
 type ReviewPageProps = {
   params: { id: string };
 };
 
-function ReviewPage({ params: { id } }: ReviewPageProps) {
-  // const review = reviews.find((r) => r.reviewId === Number(id));
-
-  const review = getReviewById(id);
+async function ReviewPage({ params: { id } }: ReviewPageProps) {
+  const review: Review | null = await getReviewById(id);
 
   if (!review) {
     return <div>Could not find this review, sorry! ID is {id}</div>;
@@ -20,16 +20,18 @@ function ReviewPage({ params: { id } }: ReviewPageProps) {
   const reviewerName = getReviewerById(review.reviewerId)?.name || "unknown";
 
   return (
-    <MovieReview
-      title={"Review"}
-      reviewText={review.reviewText}
-      releaseDate={review.releaseDate}
-      shortDescription={review.shortDescription}
-      imageUrl={review.imageUrl}
-      numberOfStars={review.starRating}
-      reviewerName={reviewerName}
-      reviewId={id}
-    />
+    <Suspense fallback={<div>Loading!</div>}>
+      <MovieReview
+        title={"Review"}
+        reviewText={review.reviewText}
+        releaseDate={review.releaseDate}
+        shortDescription={review.shortDescription}
+        imageUrl={review.imageUrl}
+        numberOfStars={review.starRating}
+        reviewerName={reviewerName}
+        reviewId={id}
+      />
+    </Suspense>
   );
 }
 

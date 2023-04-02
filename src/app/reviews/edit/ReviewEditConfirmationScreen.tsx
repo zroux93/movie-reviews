@@ -40,8 +40,11 @@ export default function ReviewEditConfirmationScreen({
     <>
       <h5>Confirm your updated review</h5>
       <div className="list-group">
-        {dataRows.map((row) => (
-          <div className="list-group-item d-flex justify-content-between">
+        {dataRows.map((row, index) => (
+          <div
+            key={index}
+            className="list-group-item d-flex justify-content-between"
+          >
             <div>{row.left}</div>
             <div>{row.right}</div>
           </div>
