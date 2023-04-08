@@ -5,7 +5,8 @@ export async function makeRequest(request: Request) {
 
   console.log(
     `REQUEST -------------------------------------------------\n` +
-      `[${sendTimestamp}] ${request.method} ${request.url}`
+      `[${sendTimestamp}] ${request.method} ${request.url}\n` +
+      `${request.body || ""}`
   );
 
   try {
@@ -15,9 +16,8 @@ export async function makeRequest(request: Request) {
 
     console.log(
       `RESPONSE -------------------------------------------------\n` +
-        `[${responseTimestamp}] ${response.status} ${
-          response.url
-        }: ${JSON.stringify(responseJson)}`
+        `[${responseTimestamp}] ${response.status} ${response.url}:\n` +
+        `${JSON.stringify(responseJson) || ""}`
     );
     return responseJson;
   } catch (exception) {

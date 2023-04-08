@@ -4,39 +4,36 @@ import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import { getReviewById, updateReviewById } from "@/app/api/reviews/reviewStore";
+import { Review } from "@/app/api/reviews/reviewStore";
+import { updateReview } from "@/app/api/reviews/reviewApi";
 
 import { PageSwitcher } from "@/app/common/PageSwitcher";
 import { ReviewEditForm } from "../ReviewEditForm";
 import ReviewEditConfirmationScreen from "../ReviewEditConfirmationScreen";
 
-type ReviewEditorPageProps = {
-  params: { id: string };
+type ReviewEditManagerProps = {
+  review: Review;
 };
 
-export default function ReviewEditorPage({
-  params: { id },
-}: ReviewEditorPageProps) {
+export default function ReviewEditManager({ review }: ReviewEditManagerProps) {
   const [currentPageId, setCurrentPageId] = useState("edit-review");
 
   const router = useRouter();
 
-  let reviewInitialData = getReviewById(id);
-
-  const [reviewData, setReviewData] = useState<FieldValues>({
-    shortDescription: reviewInitialData.shortDescription,
-    reviewText: reviewInitialData.reviewText,
-    imageUrl: reviewInitialData.imageUrl,
+  const [reviewEditedData, setReviewEditedData] = useState<FieldValues>({
+    shortDescription: review?.shortDescription,
+    reviewText: review?.reviewText,
+    imageUrl: review?.imageUrl,
   });
 
   const handleContinueFromEdit = (data: FieldValues) => {
     console.log("data from form is", data);
-    setReviewData(data);
+    setReviewEditedData(data);
     setCurrentPageId("confirm-review");
   };
 
   const handleCancelFromEdit = () => {
-    router.push(`/reviews/${id}`);
+    router.push(`/reviews/${review.reviewId}`);
   };
 
   const handleReturnToEdit = () => {
@@ -44,14 +41,14 @@ export default function ReviewEditorPage({
   };
 
   const handleSaveUpdatedReview = () => {
-    const newReviewData = {
-      ...reviewInitialData,
-      shortDescription: reviewData.shortDescription,
-      reviewText: reviewData.reviewText,
-      imageUrl: reviewData.imageUrl,
+    const newReviewEditedData: Review = {
+      ...review,
+      shortDescription: reviewEditedData.shortDescription,
+      reviewText: reviewEditedData.reviewText,
+      imageUrl: reviewEditedData.imageUrl,
     };
-    updateReviewById(newReviewData);
-    router.push(`/reviews/${id}`);
+    updateReview(newReviewEditedData);
+    router.push(`/reviews/${review.reviewId}`);
     router.refresh();
   };
 
@@ -62,7 +59,7 @@ export default function ReviewEditorPage({
         <ReviewEditForm
           onContinue={handleContinueFromEdit}
           onCancel={handleCancelFromEdit}
-          initialData={reviewData}
+          initialData={reviewEditedData}
         />
       ),
     },
@@ -70,8 +67,8 @@ export default function ReviewEditorPage({
       id: "confirm-review",
       content: (
         <ReviewEditConfirmationScreen
-          reviewInitialData={reviewInitialData}
-          reviewEditedData={reviewData}
+          reviewInitialData={review}
+          reviewEditedData={reviewEditedData}
           onReturnToEdit={handleReturnToEdit}
           onSave={handleSaveUpdatedReview}
         />
@@ -81,3 +78,5 @@ export default function ReviewEditorPage({
 
   return <PageSwitcher pages={pages} currentPageId={currentPageId} />;
 }
+
+export { ReviewEditManager };

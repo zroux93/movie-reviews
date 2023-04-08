@@ -1,10 +1,10 @@
-import { getAllReviews } from "../api/reviews/reviewStore";
+import { getAllReviews } from "@/app/api/reviews/reviewApi";
 
 import Link from "next/link";
 import { MovieReviewCard } from "./MovieReviewCard";
 
-export default function Reviews() {
-  const reviews = getAllReviews();
+export default async function Reviews() {
+  const reviews = await getAllReviews();
 
   return (
     <main className="container">
