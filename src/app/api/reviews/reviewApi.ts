@@ -7,7 +7,7 @@ export async function getReviewById(id: string, revalidate?: boolean) {
 
   const newRequest = new Request(new URL(`${baseUrl}/api/reviews/${id}`), {
     method: "GET",
-    // cache: "no-store",
+    cache: "no-store",
   });
 
   const response = await makeRequest(newRequest);
@@ -46,6 +46,7 @@ export async function updateReview(review: Review) {
 export async function getAllReviews() {
   const newRequest = new Request(new URL(`${baseUrl}/api/reviews`), {
     method: "GET",
+    cache: "no-store",
   });
 
   const response = await makeRequest(newRequest);

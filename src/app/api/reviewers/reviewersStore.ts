@@ -8,10 +8,10 @@ type Reviewer = {
 
 const reviewers: Reviewer[] = [];
 
-function loadReviewers() {
+function initializeReviewers() {
   let reviewersFile = require("../data/reviewers.json");
   reviewersFile.forEach((r: Reviewer) => {
-    addReviewer(r.id, r.name);
+    reviewers.push({ id: r.id, name: r.name });
   });
 }
 
@@ -25,7 +25,7 @@ async function saveReviewers() {
   return result;
 }
 
-loadReviewers();
+initializeReviewers();
 
 export function getReviewerById(id: string) {
   return reviewers.find((r) => r.id === id);
