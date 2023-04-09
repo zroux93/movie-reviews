@@ -28,8 +28,14 @@ function MovieReview({
       <p>{reviewText}</p>
       <p>This film has {numberOfStars} stars!</p>
       <p>Reviewed by {reviewerName}</p>
-      <Link href={`/reviews/edit/${reviewId}`}>Edit this review</Link>
-      <Link href={`/reviews`}>Back to all reviews</Link>
+      <div className="d-flex justify-content-between">
+        <Link className="btn btn-primary" href={`/reviews/edit/${reviewId}`}>
+          Edit this review
+        </Link>
+        <Link className="btn btn-outline-primary" href={`/reviews`}>
+          Back to all reviews
+        </Link>
+      </div>
     </div>
   );
 }
