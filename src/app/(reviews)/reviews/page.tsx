@@ -7,7 +7,7 @@ export default async function Reviews() {
   const reviews = await getAllReviews();
 
   return (
-    <main className="container">
+    <>
       <h1>Movie Reviews</h1>
       <div>
         <Link href={"/reviews/new"}>Create a new review!</Link>
@@ -27,6 +27,6 @@ export default async function Reviews() {
           </div>
         ))}
       </div>
-    </main>
+    </>
   );
 }

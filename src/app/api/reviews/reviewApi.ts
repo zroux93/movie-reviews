@@ -53,7 +53,7 @@ export async function getAllReviews() {
 
   const jsonReviews: Review[] = [];
 
-  response.reviews.forEach((review: Review) => {
+  response.reviews?.forEach((review: Review) => {
     jsonReviews.push({
       ...review,
     });

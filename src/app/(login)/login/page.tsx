@@ -1,9 +1,9 @@
-import { LoginForm } from "./LoginForm";
+import { SignIn } from "@clerk/nextjs/app-beta";
 
 export default function LoginPage() {
   return (
     <div className="row justify-content-center">
-      <LoginForm />
+      <SignIn signUpUrl="/sign-up" />
     </div>
   );
 }
