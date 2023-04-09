@@ -7,7 +7,7 @@ export async function getReviewById(id: string, revalidate?: boolean) {
 
   const newRequest = new Request(new URL(`${baseUrl}/api/reviews/${id}`), {
     method: "GET",
-    cache: "no-store",
+    // cache: "no-store",
   });
 
   const response = await makeRequest(newRequest);
@@ -32,14 +32,15 @@ export async function updateReview(review: Review) {
   const updateResponse = await makeRequest(updateReviewRequest);
   console.log("updated review: response was:", updateResponse);
 
-  const revalidateUrl = `${baseUrl}/api/revalidate?=testToken`;
-  const revalidateRequest = new Request(new URL(revalidateUrl), {
-    method: "POST",
-    body: JSON.stringify({ id: review.reviewId }),
-  });
+  // NOTE: maybe I don't need this now?
+  // const revalidateUrl = `${baseUrl}/api/revalidate?=testToken`;
+  // const revalidateRequest = new Request(new URL(revalidateUrl), {
+  //   method: "POST",
+  //   body: JSON.stringify({ id: review.reviewId }),
+  // });
 
-  const revalidateResponse = await makeRequest(revalidateRequest);
-  console.log("revalidate request result:", revalidateResponse);
+  // const revalidateResponse = await makeRequest(revalidateRequest);
+  // console.log("revalidate request result:", revalidateResponse);
 }
 
 export async function getAllReviews() {
