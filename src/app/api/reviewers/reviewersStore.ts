@@ -1,21 +1,37 @@
+import fsPromise from "fs/promises";
+import path from "path";
+
 type Reviewer = {
   id: string;
   name: string;
 };
 
-class ReviewersStore {
-  reviewers: Reviewer[] = [
-    { id: "zroux93", name: "Zachary Roux" },
-    { id: "kristinna112", name: "Krystyna Roux" },
-  ];
+const reviewers: Reviewer[] = [];
+
+function loadReviewers() {
+  let reviewersFile = require("../data/reviewers.json");
+  reviewersFile.forEach((r: Reviewer) => {
+    addReviewer(r.id, r.name);
+  });
 }
 
-const _reviewersStore = new ReviewersStore();
+async function saveReviewers() {
+  // TODO: add better error handling
+  const _path = path.resolve("src/app/api/data/reviewers.json");
+  const result = await fsPromise.writeFile(
+    _path,
+    JSON.stringify(reviewers, null, 4)
+  );
+  return result;
+}
+
+loadReviewers();
 
 export function getReviewerById(id: string) {
-  return _reviewersStore.reviewers.find((r) => r.id === id);
+  return reviewers.find((r) => r.id === id);
 }
 
 export function addReviewer(id: string, name: string) {
-  return _reviewersStore.reviewers.push({ id, name });
+  reviewers.push({ id, name });
+  saveReviewers();
 }

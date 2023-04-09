@@ -23,13 +23,12 @@ function loadReviews() {
 }
 
 async function saveReviews() {
+  // TODO: add better error handling
   const _path = path.resolve("src/app/api/data/reviews.json");
   const result = await fsPromise.writeFile(
     _path,
     JSON.stringify(reviews, null, 4)
   );
-
-  console.log("file writing result is", result);
   return result;
 }
 
