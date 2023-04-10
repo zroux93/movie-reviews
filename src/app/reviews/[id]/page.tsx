@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
-import { Review } from "../../../api/reviews/reviewStore";
-import { getReviewerById } from "../../../api/reviewers/reviewersStore";
-import { getReviewById } from "../../../api/reviews/reviewApi";
+import { Review } from "@/app/api/reviews/reviewStore";
+import { getReviewerById } from "@/app/api/reviewers/reviewersStore";
+import { getReviewById } from "@/app/api/reviews/reviewApi";
 
 import { MovieReview } from "./MovieReview";
 

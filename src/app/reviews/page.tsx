@@ -12,7 +12,7 @@ export default async function Reviews() {
       <div>
         <Link href={"/reviews/new"}>Create a new review!</Link>
       </div>
-      <div className="row row-cols-md-3">
+      <div className="row row-cols-md-4">
         {reviews.map((review) => (
           <div key={review.reviewId} className="col">
             <Link href={`/reviews/${review.reviewId}`}>
