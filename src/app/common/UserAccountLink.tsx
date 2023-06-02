@@ -1,35 +1,37 @@
-"use client";
+// import { User } from "@clerk/nextjs/api";
+// import { useAuth } from "@clerk/nextjs/";
+// import { useRouter } from "next/navigation";
 
-import { User } from "@clerk/nextjs/api";
-import { useAuth } from "@clerk/nextjs/";
-import { useRouter } from "next/navigation";
+import { UserButton } from "@clerk/nextjs/app-beta";
 
-import Link from "next/link";
+// import Link from "next/link";
+// import Loading from "../loading";
 
-type UserAccountLinkProps = {
-  user: User | null;
-};
+// type UserAccountLinkProps = {
+//   user: User;
+// };
 
-export default function UserAccountLink({ user }: UserAccountLinkProps) {
-  const username = user?.username;
-  const realName =
-    user?.firstName && user.lastName
-      ? `${user?.firstName} ${user?.lastName}`
-      : "";
+export default function UserAccountLink() {
+  // const auth = useAuth();
+  // const { user, isSignedIn, isLoaded } = useUser();
+  // const router = useRouter();
 
-  const userDisplayName = realName || username;
+  // const username = user?.username;
+  // const realName =
+  //   user?.firstName && user.lastName
+  //     ? `${user?.firstName} ${user?.lastName}`
+  //     : "";
 
-  const auth = useAuth();
-  const router = useRouter();
+  // const userDisplayName = realName || username;
 
-  const handleSignOut = () => {
-    auth.signOut();
-    router.push("/");
-  };
+  // const handleSignOut = () => {
+  //   auth.signOut();
+  //   router.push("/");
+  // };
 
   return (
     <div className="d-flex">
-      {user && (
+      {/* {isLoaded && isSignedIn && (
         <>
           <span className="align-self-center">{userDisplayName}</span>
           <button className="btn btn-link" onClick={handleSignOut}>
@@ -37,11 +39,20 @@ export default function UserAccountLink({ user }: UserAccountLinkProps) {
           </button>
         </>
       )}
-      {!user && (
+      {!isSignedIn && <Loading spinnerClassName="spinner-border-sm" />} */}
+      {/* {user ? (
+        <>
+          <span className="align-self-center">{userDisplayName}</span>
+          <button className="btn btn-link" onClick={handleSignOut}>
+            Sign Out
+          </button>
+        </>
+      ) : (
         <Link href="/login" className="btn btn-link">
           Sign In
         </Link>
-      )}
+      )} */}
+      <UserButton afterSignOutUrl="/" />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+// server component
+
 import { getAllReviews } from "@/app/api/reviews/reviewApi";
 
 import Link from "next/link";

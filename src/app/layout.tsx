@@ -1,8 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 
-import { ClerkProvider, currentUser } from "@clerk/nextjs/app-beta";
-import type { User } from "@clerk/nextjs/api";
-import NavBar from "./common/NavBar";
+import { ClerkProvider } from "@clerk/nextjs/app-beta";
 
 export const metadata = {
   title: "Zachary's Website",
@@ -14,18 +12,22 @@ export default async function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user: User | null = await currentUser();
-
-  const additionalLinks = [{ href: "/reviews", label: "Movie reviews" }];
-
   return (
     <html lang="en">
-      <ClerkProvider>
-        <body>
-          <NavBar user={user} additionalLinks={additionalLinks} />
-          {children}
-        </body>
-      </ClerkProvider>
+      <body>
+        <div className="container">
+          <ClerkProvider>
+            {/* <NavBar additionalLinks={additionalLinks} /> */}
+            {/* <div className="container">{children}</div> */}
+            {children}
+          </ClerkProvider>
+          <footer>
+            <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+              Copyright 2023 by Zachary Roux.
+            </div>
+          </footer>
+        </div>
+      </body>
     </html>
   );
 }

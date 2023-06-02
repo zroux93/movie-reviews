@@ -1,6 +1,8 @@
 import Link from "next/link";
 import UserAccountLink from "./UserAccountLink";
-import { User } from "@clerk/nextjs/api";
+// import { currentUser } from "@clerk/nextjs/app-beta";
+import { Suspense } from "react";
+import Loading from "../loading";
 
 type NavBarLink = {
   href: string;
@@ -9,15 +11,13 @@ type NavBarLink = {
 
 type NavBarProps = {
   additionalLinks?: NavBarLink[];
-  user: User | null;
   currentPath?: string;
   hideLinks?: boolean;
   hideUserLink?: boolean;
 };
 
-export default function NavBar({
+export default async function NavBar({
   additionalLinks = [],
-  user,
   currentPath,
   hideLinks,
   hideUserLink,
@@ -30,9 +30,11 @@ export default function NavBar({
     ...additionalLinks,
   ];
 
+  // const user = await currentUser();
+
   return (
     <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom">
-      <div className="container">
+      <div className="container-fluid">
         <Link href={"/"} className="navbar-brand">
           Zachary's Website
         </Link>
@@ -47,7 +49,11 @@ export default function NavBar({
             ))}
           </ul>
         )}
-        {!hideUserLink && <UserAccountLink user={user} />}
+        {!hideUserLink && (
+          <Suspense fallback={<Loading />}>
+            <UserAccountLink />
+          </Suspense>
+        )}
       </div>
     </nav>
   );
