@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h2>Zachary's Website</h2>
+      <h2>Zachary`&apos;`s Website</h2>
 
       <p>
-        This is a test website I've created to explore the capabilities of
-        NextJs and other Javascript frameworks.
+        This is a test website I`&apos;`ve created to explore the capabilities
+        of NextJs and other Javascript frameworks.
       </p>
 
       <Link
@@ -23,7 +23,7 @@ export default function Home() {
         // rel="noopener noreferrer"
       >
         <h2 className={inter.className}>
-          Zachary's Movie Reviews <span>-&gt;</span>
+          Zachary`&apos;`s Movie Reviews <span>-&gt;</span>
         </h2>
         <p className={inter.className}>See my movie reviews!</p>
       </Link>

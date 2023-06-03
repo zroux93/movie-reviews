@@ -36,12 +36,12 @@ export default async function NavBar({
     <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom">
       <div className="container-fluid">
         <Link href={"/"} className="navbar-brand">
-          Zachary's Website
+          Zachary`&apos;`s Website
         </Link>
         {!hideLinks && (
           <ul className="navbar-nav me-auto">
             {linksToDisplay.map((l, index) => (
-              <li className="nav-item">
+              <li className="nav-item" key={index}>
                 <Link key={index} href={l.href} className="nav-link">
                   <span>{l.label}</span>
                 </Link>
