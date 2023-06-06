@@ -1,6 +1,6 @@
 // import fsPromise from 'fs/promises';
 import reviewersFile from '../data/reviewers';
-import path from 'path';
+// import path from 'path';
 
 type Reviewer = {
   id: string;
@@ -18,12 +18,12 @@ function initializeReviewers() {
 
 async function saveReviewers() {
   // TODO: add better error handling
-  const _path = path.resolve('src/app/api/data/reviewers.json');
-  const result = await fsPromise.writeFile(
-    _path,
-    JSON.stringify(reviewers, null, 4)
-  );
-  return result;
+  // const _path = path.resolve('src/app/api/data/reviewers.json');
+  // const result = await fsPromise.writeFile(
+  //   _path,
+  //   JSON.stringify(reviewers, null, 4)
+  // );
+  // return result;
 }
 
 initializeReviewers();
