@@ -1,4 +1,4 @@
-[
+const reviews = [
     {
         "title": "Interstellar",
         "shortDescription": "S.T.A.Y.",
@@ -55,3 +55,5 @@
         "imageUrl": "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71Zhpi2GyeL.jpg"
     }
 ]
+
+export default reviews;

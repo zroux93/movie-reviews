@@ -1,8 +1,8 @@
-import Link from "next/link";
-import UserAccountLink from "./UserAccountLink";
+import Link from 'next/link';
+import UserAccountLink from './UserAccountLink';
 // import { currentUser } from "@clerk/nextjs/app-beta";
-import { Suspense } from "react";
-import Loading from "../loading";
+import { Suspense } from 'react';
+import Loading from '../loading';
 
 type NavBarLink = {
   href: string;
@@ -24,8 +24,8 @@ export default async function NavBar({
 }: NavBarProps) {
   const linksToDisplay: NavBarLink[] = [
     {
-      href: "/",
-      label: "Home",
+      href: '/',
+      label: 'Home',
     },
     ...additionalLinks,
   ];
@@ -35,8 +35,8 @@ export default async function NavBar({
   return (
     <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom">
       <div className="container-fluid">
-        <Link href={"/"} className="navbar-brand">
-          Zachary`&apos;`s Website
+        <Link href={'/'} className="navbar-brand">
+          Zachary&apos;s Website
         </Link>
         {!hideLinks && (
           <ul className="navbar-nav me-auto">

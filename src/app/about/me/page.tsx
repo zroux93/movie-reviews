@@ -5,7 +5,7 @@ export default function AboutMePage() {
         <div className="row">
           <div className="col-md-8">
             <h3>About me</h3>
-            <p>My name is Zachary Roux, and I`&apos;`m a software engineer.</p>
+            <p>My name is Zachary Roux, and I&apos;m a software engineer.</p>
 
             <h5>My background</h5>
             <ul>
@@ -31,13 +31,13 @@ export default function AboutMePage() {
             <p>
               I had been reading about the latest progress with React Server
               Components and NextJS, and wanted to play with it. Since I
-              don`&apos;`t have the option to use NextJS at my current
-              employment, I thought it would be a good opportunity to create a
-              simple website of my own. In addition to giving me a chance to
-              explore and learn about NextJS, it can serve as a playground for
-              other tech ideas I want to explore and a public demonstration of
-              some of the types of things I am able to work on (since my
-              professional code is all closed-source).
+              don&apos;t have the option to use NextJS at my current employment,
+              I thought it would be a good opportunity to create a simple
+              website of my own. In addition to giving me a chance to explore
+              and learn about NextJS, it can serve as a playground for other
+              tech ideas I want to explore and a public demonstration of some of
+              the types of things I am able to work on (since my professional
+              code is all closed-source).
             </p>
 
             <h5>My non-programming interests</h5>

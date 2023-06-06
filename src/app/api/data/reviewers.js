@@ -1,4 +1,4 @@
-[
+const reviewers = [
     {
         "id": "zroux93",
         "name": "Zachary Roux"
@@ -8,3 +8,5 @@
         "name": "Krystyna Roux"
     }
 ]
+
+export default reviewers;

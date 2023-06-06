@@ -1,5 +1,6 @@
-import fsPromise from "fs/promises";
-import path from "path";
+// import fsPromise from 'fs/promises';
+import reviewersFile from '../data/reviewers';
+import path from 'path';
 
 type Reviewer = {
   id: string;
@@ -9,7 +10,7 @@ type Reviewer = {
 const reviewers: Reviewer[] = [];
 
 function initializeReviewers() {
-  let reviewersFile = require("../data/reviewers.json");
+  // let reviewersFile = require('../data/reviewers.json');
   reviewersFile.forEach((r: Reviewer) => {
     reviewers.push({ id: r.id, name: r.name });
   });
@@ -17,7 +18,7 @@ function initializeReviewers() {
 
 async function saveReviewers() {
   // TODO: add better error handling
-  const _path = path.resolve("src/app/api/data/reviewers.json");
+  const _path = path.resolve('src/app/api/data/reviewers.json');
   const result = await fsPromise.writeFile(
     _path,
     JSON.stringify(reviewers, null, 4)

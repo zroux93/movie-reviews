@@ -1,5 +1,6 @@
-import fsPromise from "fs/promises";
-import path from "path";
+// import fsPromise from "fs/promises";
+import reviewsFile from '../data/reviews';
+import path from 'path';
 
 export type Review = {
   shortDescription: string;
@@ -16,7 +17,7 @@ export type Review = {
 const reviews: Review[] = [];
 
 function loadReviews() {
-  let reviewsFile = require("../data/reviews.json");
+  // let reviewsFile = require("../data/reviews.json");
   reviewsFile.forEach((r: Review) => {
     addReview(r);
   });
@@ -24,12 +25,13 @@ function loadReviews() {
 
 async function saveReviews() {
   // TODO: add better error handling
-  const _path = path.resolve("src/app/api/data/reviews.json");
-  const result = await fsPromise.writeFile(
-    _path,
-    JSON.stringify(reviews, null, 4)
-  );
-  return result;
+  // const _path = path.resolve("src/app/api/data/reviews.json");
+  // const result = await fsPromise.writeFile(
+  //   _path,
+  //   JSON.stringify(reviews, null, 4)
+  // );
+  // return result;
+  // reviewsFile = reviews;
 }
 
 loadReviews();
@@ -64,5 +66,5 @@ export function updateReviewById(review: Review) {
     addReview(review);
   }
   saveReviews();
-  console.log("review store is now:", reviews);
+  console.log('review store is now:', reviews);
 }
