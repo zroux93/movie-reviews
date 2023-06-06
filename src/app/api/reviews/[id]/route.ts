@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-import { getReviewById, Review, updateReviewById } from "../reviewStore";
+import { getReviewById, Review, updateReviewById } from '../reviewStore';
 
 export async function GET(
   request: Request,
@@ -16,12 +16,12 @@ export async function GET(
 }
 
 export async function PUT(request: Request) {
-  console.log("REQUEST RECEIVED BY SERVER: ", request);
+  console.log('REQUEST RECEIVED BY SERVER: ', request);
   const requestJson = await request.json();
-  console.log("request json received was", requestJson);
+  console.log('request json received was', requestJson);
   const review: Review = { ...requestJson.review };
 
-  console.log("review is", review);
+  console.log('review is', review);
 
   updateReviewById(review);
 

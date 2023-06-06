@@ -1,63 +1,54 @@
-import { baseUrl, makeRequest } from "../api";
+// import { Review } from './reviewStore';
 
-import { Review } from "./reviewStore";
+// import { db } from '../database';
 
-export async function getReviewById(id: string, revalidate?: boolean) {
-  console.log("ID is", id);
+// export async function getReviewById(id: number) {
+//   const result = await db
+//     .selectFrom('review')
+//     .selectAll()
+//     .where('review.review_id', '==', id)
+//     .executeTakeFirstOrThrow();
 
-  const newRequest = new Request(new URL(`${baseUrl}/api/reviews/${id}`), {
-    method: "GET",
-    cache: "no-store",
-  });
+//   return result;
+// }
 
-  const response = await makeRequest(newRequest);
+// export async function updateReview(review: Review) {
+//   const result = await db
+//     .updateTable('review')
+//     .set({
+//       reviewer_id: review.reviewerId,
+//       release_date: review.releaseDate,
+//       movie_id: review.movieId,
+//       star_rating: review.starRating,
+//       review_text: review.reviewText,
+//       short_description: review.shortDescription,
+//       image_url: review.imageUrl,
+//       title: review.title,
+//     })
+//     .where('review.review_id', '==', review.reviewId)
+//     .executeTakeFirstOrThrow();
 
-  const jsonReview: Review = {
-    ...response.review,
-  };
-  return jsonReview;
-}
+//   return result;
+// }
 
-export async function updateReview(review: Review) {
-  console.log("review to update is:", review);
+// export async function addReview(review: Review) {
+//   const result = await db
+//     .insertInto('review')
+//     .values({
+//       reviewer_id: review.reviewerId,
+//       release_date: review.releaseDate,
+//       movie_id: review.movieId,
+//       star_rating: review.starRating,
+//       review_text: review.reviewText,
+//       short_description: review.shortDescription,
+//       image_url: review.imageUrl,
+//       title: review.title,
+//     })
+//     .execute();
+//   return result;
+// }
 
-  const updateReviewRequest = new Request(
-    new URL(`${baseUrl}/api/reviews/${review.reviewId}`),
-    {
-      method: "PUT",
-      body: JSON.stringify({ review }),
-    }
-  );
-
-  const updateResponse = await makeRequest(updateReviewRequest);
-  console.log("updated review: response was:", updateResponse);
-
-  // NOTE: maybe I don't need this now?
-  // const revalidateUrl = `${baseUrl}/api/revalidate?=testToken`;
-  // const revalidateRequest = new Request(new URL(revalidateUrl), {
-  //   method: "POST",
-  //   body: JSON.stringify({ id: review.reviewId }),
-  // });
-
-  // const revalidateResponse = await makeRequest(revalidateRequest);
-  // console.log("revalidate request result:", revalidateResponse);
-}
-
-export async function getAllReviews() {
-  const newRequest = new Request(new URL(`${baseUrl}/api/reviews`), {
-    method: "GET",
-    cache: "no-store",
-  });
-
-  const response = await makeRequest(newRequest);
-
-  const jsonReviews: Review[] = [];
-
-  response.reviews?.forEach((review: Review) => {
-    jsonReviews.push({
-      ...review,
-    });
-  });
-
-  return jsonReviews;
-}
+// export async function getAllReviews() {
+//   const result = await db.selectFrom('review').selectAll().execute();
+//   return result;
+// }

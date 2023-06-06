@@ -1,6 +1,4 @@
-import { FieldValues, useForm } from "react-hook-form";
-
-import { Review } from "@/app/api/reviews/reviewStore";
+import { FieldValues, useForm } from 'react-hook-form';
 
 type ReviewEditFormProps = {
   onContinue: (data: FieldValues) => void;
@@ -30,7 +28,7 @@ export default function ReviewEditForm({
           </label>
           <input
             id="review-edit-short-description"
-            {...register("shortDescription")}
+            {...register('shortDescription')}
             placeholder="add a short tagline here"
             className="form-control"
           />
@@ -41,7 +39,7 @@ export default function ReviewEditForm({
           </label>
           <textarea
             id="review-edit-review-text"
-            {...register("reviewText")}
+            {...register('reviewText')}
             placeholder="add your review here"
             className="form-control"
           />
@@ -52,7 +50,7 @@ export default function ReviewEditForm({
           </label>
           <textarea
             id="review-edit-image-url"
-            {...register("imageUrl")}
+            {...register('imageUrl')}
             placeholder="add an image URL here"
             className="form-control"
           />
