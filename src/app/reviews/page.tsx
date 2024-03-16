@@ -1,9 +1,7 @@
-// server component
+import { getAllReviews } from '@/app/api/reviews/reviewStore';
 
-import { getAllReviews } from "@/app/api/reviews/reviewStore";
-
-import Link from "next/link";
-import { MovieReviewCard } from "./MovieReviewCard";
+import Link from 'next/link';
+import { MovieReviewCard } from './MovieReviewCard';
 
 export default async function Reviews() {
   const reviews = await getAllReviews();
@@ -31,7 +29,7 @@ export default async function Reviews() {
         )}
       </div>
       <div>
-        <Link href={"/reviews/new"}>Create a new review!</Link>
+        <Link href={'/reviews/new'}>Create a new review!</Link>
       </div>
     </>
   );

@@ -74,3 +74,12 @@ export async function updateReviewById(review: Review) {
 
   return result;
 }
+
+export async function deleteReviewById(reviewId: number) {
+  const result = await db
+    .deleteFrom('review')
+    .where('review_id', '=', reviewId)
+    .execute();
+
+  return result;
+}

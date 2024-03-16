@@ -8,7 +8,7 @@ import { type Review } from '../../review';
 import { PageSwitcher } from '@/app/common/PageSwitcher';
 import { ReviewEditForm } from '../ReviewEditForm';
 import ReviewEditConfirmationScreen from '../ReviewEditConfirmationScreen';
-import { handleEditReview } from '../../actions';
+import { editReview } from '../../actions';
 
 type ReviewEditManagerProps = {
   review: Review;
@@ -46,7 +46,7 @@ export default function ReviewEditManager({ review }: ReviewEditManagerProps) {
       reviewText: reviewEditedData.reviewText,
       imageUrl: reviewEditedData.imageUrl,
     };
-    handleEditReview(newReviewEditedData);
+    editReview(newReviewEditedData);
     router.push(`/reviews/${review.reviewId}`);
     router.refresh();
   };

@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Link from 'next/link';
 
 import { type NewReview } from '../review';
-import { handleCreateReview } from '../actions';
+import { createReview } from '../actions';
 import { TextInput } from '@/app/common/Forms/TextInput';
 import { TextAreaInput } from '@/app/common/Forms/TextAreaInput';
 
@@ -22,7 +22,7 @@ export default function CreateReviewForm({
   });
 
   const handleSubmit = async (formData: NewReview) => {
-    await handleCreateReview(formData);
+    await createReview(formData);
   };
 
   return (

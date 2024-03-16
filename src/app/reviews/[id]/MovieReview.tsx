@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { deleteReview } from '../actions';
+import { DeleteReviewButton } from './DeleteReviewButton';
 
 type MovieReviewProps = {
   title: string;
@@ -29,9 +31,12 @@ function MovieReview({
       <p>This film has {numberOfStars} stars!</p>
       <p>Reviewed by {reviewerName}</p>
       <div className="d-flex justify-content-between">
-        <Link className="btn btn-primary" href={`/reviews/edit/${reviewId}`}>
-          Edit this review
-        </Link>
+        <div>
+          <Link className="btn btn-primary" href={`/reviews/edit/${reviewId}`}>
+            Edit this review
+          </Link>
+          <DeleteReviewButton id={reviewId} returnHref="/reviews" />
+        </div>
         <Link className="btn btn-outline-primary" href={`/reviews`}>
           Back to all reviews
         </Link>
