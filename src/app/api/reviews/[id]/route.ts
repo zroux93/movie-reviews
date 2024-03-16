@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 
-import { getReviewById, Review, updateReviewById } from '../reviewStore';
+import { getReviewById, updateReviewById } from '../reviewStore';
+import { Review } from '@/app/reviews/review';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: number } }
 ) {
   if (!params) {
     return NextResponse.error();
