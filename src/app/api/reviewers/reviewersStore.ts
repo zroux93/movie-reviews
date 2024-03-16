@@ -6,7 +6,6 @@ import { db } from '../database';
 export async function getReviewerById(id: number) {
   const result = await db
     .selectFrom('reviewer')
-    // .select(['id', 'name', 'username'])
     .selectAll()
     .where('reviewer.id', '==', id)
     .executeTakeFirstOrThrow();

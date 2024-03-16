@@ -9,7 +9,7 @@ import { TextInput } from '@/app/common/Forms/TextInput';
 import { TextAreaInput } from '@/app/common/Forms/TextAreaInput';
 
 type CreateReviewFormProps = {
-  defaultValues: NewReview;
+  defaultValues?: NewReview;
   onCancelHref: string;
 };
 
@@ -22,7 +22,6 @@ export default function CreateReviewForm({
   });
 
   const handleSubmit = async (formData: NewReview) => {
-    console.log('handling submit...');
     await handleCreateReview(formData);
   };
 
@@ -44,11 +43,13 @@ export default function CreateReviewForm({
             label="Review Title"
             placeholder="review title..."
             name="title"
+            isRequired
           />
           <TextAreaInput
             label="Review Text"
             placeholder="I liked/disliked this movie because..."
             name="reviewText"
+            isRequired
           />
           <TextInput
             label="Star Rating"
@@ -56,8 +57,13 @@ export default function CreateReviewForm({
             max={5}
             min={1}
             name="starRating"
+            isRequired
           />
-          <TextInput label="Release date (month and year)" name="releaseDate" />
+          <TextInput
+            label="Release date (month and year)"
+            name="releaseDate"
+            isRequired
+          />
           <TextInput label="Image url (optional)" name="imageUrl" />
           <div>
             <button className="btn btn-primary" type="submit">

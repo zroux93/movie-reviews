@@ -34,17 +34,7 @@ export async function getAllReviews() {
   const result = await db.selectFrom('review').selectAll().execute();
 
   console.log('result is', result);
-  return result.map((r) => ({
-    reviewId: r.review_id,
-    reviewerId: r.reviewer_id,
-    releaseDate: r.release_date,
-    movieId: r.movie_id,
-    starRating: r.star_rating,
-    reviewText: r.review_text,
-    shortDescription: r.short_description,
-    imageUrl: r.image_url,
-    title: r.title,
-  }));
+  return result.map(mapReviewFromDbToApp);
 }
 
 export async function addReview(review: NewReview) {
