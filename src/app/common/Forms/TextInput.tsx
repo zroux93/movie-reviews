@@ -49,9 +49,9 @@ const TextInput = ({
       />
 
       {errorMessage ? (
-        <div className="is-invalid" aria-describedby={id}>
+        <small className="text-danger" aria-describedby={id}>
           {errorMessage}
-        </div>
+        </small>
       ) : null}
     </div>
   );
