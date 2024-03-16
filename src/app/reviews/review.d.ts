@@ -12,3 +12,9 @@ export type NewReview = {
   releaseDate: string;
   imageUrl?: string;
 };
+
+export type Reviewer = {
+  id: number;
+  name: string;
+  username: string;
+};

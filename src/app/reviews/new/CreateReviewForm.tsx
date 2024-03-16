@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import Link from 'next/link';
 
 import { type NewReview } from '../review';
@@ -17,53 +17,58 @@ export default function CreateReviewForm({
   onCancelHref,
   defaultValues,
 }: CreateReviewFormProps) {
-  const { register, handleSubmit: handleFormSubmit } = useForm<NewReview>({
+  const formMethods = useForm<NewReview>({
     defaultValues,
   });
 
   const handleSubmit = async (formData: NewReview) => {
+    console.log('handling submit...');
     await handleCreateReview(formData);
   };
 
   return (
-    <form onSubmit={handleFormSubmit(handleSubmit)} method="post">
-      <div className="row g-3">
-        <TextInput
-          placeholder="add a short tagline..."
-          label="Tagline"
-          {...register('shortDescription')}
-        />
-        <TextInput
-          label="Review Title"
-          placeholder="review title..."
-          {...register('title')}
-        />
-        <TextAreaInput
-          label="Review Text"
-          placeholder="I liked/disliked this movie because..."
-          {...register('reviewText')}
-        />
-        <TextInput
-          label="Star Rating"
-          type="number"
-          max={5}
-          min={1}
-          {...register('starRating')}
-        />
-        <TextInput
-          label="Release date (month and year)"
-          {...register('releaseDate')}
-        />
-        <TextInput label="Image url (optional)" {...register('imageUrl')} />
-        <div>
-          <button className="btn btn-primary" type="submit">
-            Continue
-          </button>
-          <Link href={onCancelHref} className="btn btn-link">
-            Cancel
-          </Link>
+    <FormProvider {...formMethods}>
+      <form
+        onSubmit={formMethods.handleSubmit(handleSubmit)}
+        method="post"
+        noValidate
+      >
+        <div className="row g-3">
+          <TextInput
+            placeholder="add a short tagline..."
+            label="Tagline"
+            name="shortDescription"
+            isRequired
+          />
+          <TextInput
+            label="Review Title"
+            placeholder="review title..."
+            name="title"
+          />
+          <TextAreaInput
+            label="Review Text"
+            placeholder="I liked/disliked this movie because..."
+            name="reviewText"
+          />
+          <TextInput
+            label="Star Rating"
+            type="number"
+            max={5}
+            min={1}
+            name="starRating"
+          />
+          <TextInput label="Release date (month and year)" name="releaseDate" />
+          <TextInput label="Image url (optional)" name="imageUrl" />
+          <div>
+            <button className="btn btn-primary" type="submit">
+              Continue
+            </button>
+            <Link href={onCancelHref} className="btn btn-link">
+              Cancel
+            </Link>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </FormProvider>
   );
 }

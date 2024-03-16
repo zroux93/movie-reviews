@@ -1,59 +1,34 @@
 import { NewReview, Review } from '@/app/reviews/review';
-import { db } from '../database';
+import { ReviewSchema, db } from '../database';
 
-// function loadReviews() {
-//   let reviewsFile = require("../data/reviews.json");
-//   reviewsFile.forEach((r: Review) => {
-//     addReview(r);
-//   });
-// }
+type DbReview = Omit<ReviewSchema, 'reviewer_id' | 'review_id'> & {
+  reviewer_id: number;
+  review_id: number;
+};
 
-// async function saveReviews() {
-//   // TODO: add better error handling
-//   const _path = path.resolve("src/app/api/data/reviews.json");
-//   const result = await fsPromise.writeFile(
-//     _path,
-//     JSON.stringify(reviews, null, 4)
-//   );
-//   return result;
-// }
+function mapReviewFromDbToApp(dbReview: DbReview) {
+  return {
+    reviewId: dbReview.review_id,
+    reviewerId: dbReview.reviewer_id,
+    releaseDate: dbReview.release_date,
+    movieId: dbReview.movie_id,
+    starRating: dbReview.star_rating,
+    reviewText: dbReview.review_text,
+    shortDescription: dbReview.short_description,
+    imageUrl: dbReview.image_url,
+    title: dbReview.title,
+  };
+}
 
-// loadReviews();
-// loadReviews();
-
-// export function getReviewById(reviewId: string) {
-//   const result = reviews.find((r) => r.reviewId === reviewId);
-//   if (!result) {
-//     throw Error(`Review not found for id ${reviewId}`);
-//     // return null;
-//   } else {
-//     return result;
-//   }
-// }
 export async function getReviewById(reviewId: number) {
   const result = await db
     .selectFrom('review')
     .selectAll()
     .where('review.review_id', '==', reviewId)
     .executeTakeFirstOrThrow();
+
+  return mapReviewFromDbToApp(result);
 }
-
-// export function getReviewsForMovieId(movieId: string) {
-//   return reviews.filter((r) => r.movieId === movieId);
-//   return result;
-// const result = reviews.find((r) => r.reviewId === reviewId)
-// if (!result) {
-//     throw Error(`Review not found for id ${reviewId}`)
-//     // return null;
-// } else {
-//     return result
-// }
-// }
-
-// TODO: add this later?
-// export function getReviewsForMovieId(movieId: string) {
-//     return reviews.filter((r) => r.movieId === movieId);
-// }
 
 export async function getAllReviews() {
   const result = await db.selectFrom('review').selectAll().execute();
@@ -108,12 +83,3 @@ export async function updateReviewById(review: Review) {
 
   return result;
 }
-
-// const reviewIndex = reviews.findIndex((r) => r.reviewId === review.reviewId);
-// if (reviewIndex >= 0) {
-//   reviews[reviewIndex] = review;
-// } else {
-//   addReview(review);
-// }
-// saveReviews();
-// console.log('review store is now:', reviews);

@@ -1,8 +1,8 @@
 import { createKysely } from '@vercel/postgres-kysely';
-import { Reviewer } from './reviewers/reviewersStore';
 import { Generated } from 'kysely';
+import { Reviewer } from '../reviews/review';
 
-type ReviewSchema = {
+export type ReviewSchema = {
   short_description: string;
   title: string;
   review_id: Generated<number>;
@@ -14,9 +14,15 @@ type ReviewSchema = {
   review_text: string;
 };
 
+export type ReviewerSchema = {
+  username: string;
+  name: string;
+  id: Generated<number>;
+};
+
 interface Database {
   review: ReviewSchema;
-  reviewer: Reviewer;
+  reviewer: ReviewerSchema;
 }
 
 const db = createKysely<Database>();

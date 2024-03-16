@@ -6,6 +6,7 @@ type TextAreaInputProps = {
   wrapperClassName?: string;
   labelClassName?: string;
   inputClassName?: string;
+  errorMessage?: string;
 } & Omit<InputHTMLAttributes<HTMLTextAreaElement>, 'className' | 'id'>;
 
 export const TextAreaInput = forwardRef<
@@ -18,6 +19,7 @@ export const TextAreaInput = forwardRef<
       wrapperClassName,
       labelClassName,
       inputClassName,
+      errorMessage,
       ...props
     }: TextAreaInputProps,
     ref
@@ -35,6 +37,7 @@ export const TextAreaInput = forwardRef<
           ref={ref}
           {...props}
         />
+        {errorMessage ? <div>{errorMessage}</div> : null}
       </div>
     );
   }

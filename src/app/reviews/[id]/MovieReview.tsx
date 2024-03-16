@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 type MovieReviewProps = {
   title: string;
@@ -8,7 +8,7 @@ type MovieReviewProps = {
   numberOfStars: number;
   releaseDate: string;
   reviewerName: string;
-  reviewId: string;
+  reviewId: number;
 };
 
 function MovieReview({

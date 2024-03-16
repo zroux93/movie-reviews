@@ -1,13 +1,13 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import { Review } from "@/app/api/reviews/reviewStore";
-import { getReviewerById } from "@/app/api/reviewers/reviewersStore";
-import { getReviewById } from "@/app/api/reviews/reviewApi";
+import { getReviewerById } from '@/app/api/reviewers/reviewersStore';
 
-import { MovieReview } from "./MovieReview";
+import { MovieReview } from './MovieReview';
+import { Review } from '../review';
+import { getReviewById } from '@/app/api/reviews/reviewStore';
 
 type ReviewPageProps = {
-  params: { id: string };
+  params: { id: number };
 };
 
 async function ReviewPage({ params: { id } }: ReviewPageProps) {
@@ -17,12 +17,13 @@ async function ReviewPage({ params: { id } }: ReviewPageProps) {
     return <div>Could not find this review, sorry! ID is {id}</div>;
   }
 
-  const reviewerName = getReviewerById(review.reviewerId)?.name || "unknown";
+  const reviewerName =
+    (await getReviewerById(review.reviewerId))?.name || 'unknown';
 
   return (
     <Suspense fallback={<div>Loading!</div>}>
       <MovieReview
-        title={"Review"}
+        title={'Review'}
         reviewText={review.reviewText}
         releaseDate={review.releaseDate}
         shortDescription={review.shortDescription}
