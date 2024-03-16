@@ -1,4 +1,4 @@
-import { forwardRef, type InputHTMLAttributes, useId } from 'react';
+import { type InputHTMLAttributes, useId } from 'react';
 import { type RegisterOptions, useFormContext } from 'react-hook-form';
 
 type TextInputProps = {
@@ -12,53 +12,49 @@ type TextInputProps = {
   isRequired?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'id'>;
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    {
-      name,
-      label,
-      wrapperClassName,
-      labelClassName,
-      inputClassName,
-      registerOptions,
-      isRequired,
-      ...props
-    }: TextInputProps,
-    ref
-  ) => {
-    const id = useId();
+const TextInput = ({
+  name,
+  label,
+  wrapperClassName,
+  labelClassName,
+  inputClassName,
+  registerOptions,
+  isRequired,
+  ...props
+}: TextInputProps) => {
+  const id = useId();
 
-    const {
-      register,
-      formState: { errors },
-    } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
-    const errorMessage = errors?.[name]?.message?.toString();
+  const errorMessage = errors?.[name]?.message?.toString();
 
-    const internalRegisterOptions: RegisterOptions = {
-      ...(isRequired && { required: `${label} is required` }),
-      ...registerOptions,
-    };
+  const internalRegisterOptions: RegisterOptions = {
+    ...(isRequired && { required: `${label} is required` }),
+    ...registerOptions,
+  };
 
-    return (
-      <div className={wrapperClassName || 'col-12'}>
-        <label className={labelClassName || 'form-label'} htmlFor={id}>
-          {label}
-        </label>
-        <input
-          {...register(name, internalRegisterOptions)}
-          id={id}
-          className={inputClassName || 'form-control'}
-          ref={ref}
-          {...props}
-        />
+  return (
+    <div className={wrapperClassName || 'col-12'}>
+      <label className={labelClassName || 'form-label'} htmlFor={id}>
+        {label}
+      </label>
+      <input
+        {...register(name, internalRegisterOptions)}
+        id={id}
+        className={inputClassName || 'form-control'}
+        {...props}
+      />
 
-        {errorMessage ? (
-          <div className="is-invalid" aria-describedby={id}>
-            {errorMessage}
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-);
+      {errorMessage ? (
+        <div className="is-invalid" aria-describedby={id}>
+          {errorMessage}
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export { TextInput };
