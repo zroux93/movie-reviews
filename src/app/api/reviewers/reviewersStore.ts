@@ -7,8 +7,16 @@ export async function getReviewerById(id: number) {
   const result = await db
     .selectFrom('reviewer')
     .selectAll()
-    .where('reviewer.id', '==', id)
-    .executeTakeFirstOrThrow();
+    .where('id', '=', id)
+    .executeTakeFirst();
+
+  if (!result) {
+    return {
+      name: 'Not Found',
+      username: 'not_found',
+      id: 0,
+    };
+  }
 
   const reviewer: Reviewer = {
     name: result.name,

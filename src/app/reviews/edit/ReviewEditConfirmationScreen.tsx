@@ -1,7 +1,7 @@
-import { Review } from "@/app/api/reviews/reviewStore";
-import { FieldValues } from "react-hook-form";
+import { FieldValues } from 'react-hook-form';
+import Image from 'next/image';
 
-import Image from "next/image";
+import { Review } from '../review';
 
 type ReviewEditConfirmationScreenProps = {
   reviewEditedData: FieldValues;
@@ -22,18 +22,18 @@ export default function ReviewEditConfirmationScreen({
       width={1200}
       height={400}
       style={{
-        maxWidth: "200px",
-        height: "auto",
+        maxWidth: '200px',
+        height: 'auto',
       }}
       alt="poster artwork"
     />
   );
 
   const dataRows = [
-    { left: "Movie Title:", right: reviewInitialData.title },
-    { left: "Image URL:", right: reviewEditedData.imageUrl },
-    { left: "Image Preview:", right: imagePreview },
-    { left: "Review Text:", right: reviewEditedData.reviewText },
+    { left: 'Movie Title:', right: reviewInitialData.title },
+    { left: 'Image URL:', right: reviewEditedData.imageUrl },
+    { left: 'Image Preview:', right: imagePreview },
+    { left: 'Review Text:', right: reviewEditedData.reviewText },
   ];
 
   return (

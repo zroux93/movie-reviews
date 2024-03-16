@@ -10,8 +10,10 @@ type ReviewPageProps = {
   params: { id: number };
 };
 
-async function ReviewPage({ params: { id } }: ReviewPageProps) {
-  const review: Review | null = await getReviewById(id);
+async function ReviewPage({ params }: ReviewPageProps) {
+  console.log('params:', params);
+  const { id } = params;
+  const review: Review | null = await getReviewById(Number(id));
 
   if (!review) {
     return <div>Could not find this review, sorry! ID is {id}</div>;

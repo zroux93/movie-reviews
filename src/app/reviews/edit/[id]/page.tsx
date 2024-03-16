@@ -1,6 +1,5 @@
-import { getReviewById } from "@/app/api/reviews/reviewApi";
-
-import ReviewEditManager from "./ReviewEditManager";
+import { getReviewById } from '@/app/api/reviews/reviewStore';
+import ReviewEditManager from './ReviewEditManager';
 
 type ReviewEditorPageProps = {
   params: { id: string };
@@ -9,7 +8,7 @@ type ReviewEditorPageProps = {
 export default async function ReviewEditorPage({
   params: { id },
 }: ReviewEditorPageProps) {
-  const reviewInitialData = await getReviewById(id);
+  const reviewInitialData = await getReviewById(Number(id));
 
   return <ReviewEditManager review={reviewInitialData} />;
 }

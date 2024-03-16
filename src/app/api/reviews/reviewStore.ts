@@ -21,10 +21,11 @@ function mapReviewFromDbToApp(dbReview: DbReview) {
 }
 
 export async function getReviewById(reviewId: number) {
+  console.log({ reviewId });
   const result = await db
     .selectFrom('review')
     .selectAll()
-    .where('review.review_id', '==', reviewId)
+    .where('review_id', '=', reviewId)
     .executeTakeFirstOrThrow();
 
   return mapReviewFromDbToApp(result);
