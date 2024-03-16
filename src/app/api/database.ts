@@ -1,17 +1,16 @@
 import { createKysely } from '@vercel/postgres-kysely';
-import { NewReview } from './reviews/reviewStore';
 import { Reviewer } from './reviewers/reviewersStore';
 import { Generated } from 'kysely';
 
 type ReviewSchema = {
-  short_description: string | undefined;
+  short_description: string;
   title: string;
   review_id: Generated<number>;
   reviewer_id: number;
   movie_id: number;
   star_rating: number;
   release_date: string;
-  image_url: string | undefined;
+  image_url: string;
   review_text: string;
 };
 

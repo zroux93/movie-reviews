@@ -1,54 +1,60 @@
-import FormInputWithLabel from '@/app/common/Forms/FormInputWithLabel';
+'use client';
+
+import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { FieldValues } from 'react-hook-form';
+
+import { type NewReview } from '../review';
+import { handleCreateReview } from '../actions';
+import { TextInput } from '@/app/common/Forms/TextInput';
+import { TextAreaInput } from '@/app/common/Forms/TextAreaInput';
 
 type CreateReviewFormProps = {
-  // onContinue: (data: FieldValues) => void;
+  defaultValues: NewReview;
   onCancelHref: string;
 };
 
 export default function CreateReviewForm({
-  // onContinue,
   onCancelHref,
+  defaultValues,
 }: CreateReviewFormProps) {
-  // const { register, handleSubmit } = useForm();
+  const { register, handleSubmit: handleFormSubmit } = useForm<NewReview>({
+    defaultValues,
+  });
+
+  const handleSubmit = async (formData: NewReview) => {
+    await handleCreateReview(formData);
+  };
 
   return (
-    <form action="/api/reviews" method="post">
+    <form onSubmit={handleFormSubmit(handleSubmit)} method="post">
       <div className="row g-3">
-        <FormInputWithLabel
-          id="shortDescription"
+        <TextInput
           placeholder="add a short tagline..."
           label="Tagline"
-        >
-          <input />
-        </FormInputWithLabel>
-        <FormInputWithLabel
-          id="title"
+          {...register('shortDescription')}
+        />
+        <TextInput
           label="Review Title"
           placeholder="review title..."
-        >
-          <input />
-        </FormInputWithLabel>
-        <FormInputWithLabel
-          id="reviewText"
+          {...register('title')}
+        />
+        <TextAreaInput
           label="Review Text"
           placeholder="I liked/disliked this movie because..."
-        >
-          <textarea />
-        </FormInputWithLabel>
-        <FormInputWithLabel id="starRating" label="Star Rating">
-          <input type="number" max={5} min={1} />
-        </FormInputWithLabel>
-        <FormInputWithLabel
-          id="releaseDate"
+          {...register('reviewText')}
+        />
+        <TextInput
+          label="Star Rating"
+          type="number"
+          max={5}
+          min={1}
+          {...register('starRating')}
+        />
+        <TextInput
           label="Release date (month and year)"
-        >
-          <input />
-        </FormInputWithLabel>
-        <FormInputWithLabel id="imageUrl" label="Image url (optional)">
-          <input />
-        </FormInputWithLabel>
+          {...register('releaseDate')}
+        />
+        <TextInput label="Image url (optional)" {...register('imageUrl')} />
         <div>
           <button className="btn btn-primary" type="submit">
             Continue
@@ -56,9 +62,6 @@ export default function CreateReviewForm({
           <Link href={onCancelHref} className="btn btn-link">
             Cancel
           </Link>
-          {/* <button className="btn btn-link" onClick={onCancel}>
-            Cancel
-          </button> */}
         </div>
       </div>
     </form>

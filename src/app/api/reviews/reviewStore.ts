@@ -1,23 +1,5 @@
-// // import fsPromise from "fs/promises";
-// import { createKysely } from "@vercel/postgres-kysely";
-
-// import path from 'path';
+import { NewReview, Review } from '@/app/reviews/review';
 import { db } from '../database';
-
-export type Review = {
-  reviewId: number;
-} & NewReview;
-
-export type NewReview = {
-  shortDescription: string;
-  title: string;
-  movieId: number;
-  reviewText: string;
-  starRating: number;
-  reviewerId: number;
-  releaseDate: string;
-  imageUrl?: string;
-};
 
 // function loadReviews() {
 //   let reviewsFile = require("../data/reviews.json");
@@ -36,37 +18,37 @@ export type NewReview = {
 //   return result;
 // }
 
-loadReviews();
+// loadReviews();
 // loadReviews();
 
-export function getReviewById(reviewId: string) {
-  const result = reviews.find((r) => r.reviewId === reviewId);
-  if (!result) {
-    throw Error(`Review not found for id ${reviewId}`);
-    // return null;
-  } else {
-    return result;
-  }
-}
+// export function getReviewById(reviewId: string) {
+//   const result = reviews.find((r) => r.reviewId === reviewId);
+//   if (!result) {
+//     throw Error(`Review not found for id ${reviewId}`);
+//     // return null;
+//   } else {
+//     return result;
+//   }
+// }
 export async function getReviewById(reviewId: number) {
   const result = await db
     .selectFrom('review')
     .selectAll()
     .where('review.review_id', '==', reviewId)
     .executeTakeFirstOrThrow();
-
-export function getReviewsForMovieId(movieId: string) {
-  return reviews.filter((r) => r.movieId === movieId);
-  return result;
-
-  // const result = reviews.find((r) => r.reviewId === reviewId)
-  // if (!result) {
-  //     throw Error(`Review not found for id ${reviewId}`)
-  //     // return null;
-  // } else {
-  //     return result
-  // }
 }
+
+// export function getReviewsForMovieId(movieId: string) {
+//   return reviews.filter((r) => r.movieId === movieId);
+//   return result;
+// const result = reviews.find((r) => r.reviewId === reviewId)
+// if (!result) {
+//     throw Error(`Review not found for id ${reviewId}`)
+//     // return null;
+// } else {
+//     return result
+// }
+// }
 
 // TODO: add this later?
 // export function getReviewsForMovieId(movieId: string) {
@@ -101,13 +83,11 @@ export async function addReview(review: NewReview) {
       star_rating: review.starRating,
       review_text: review.reviewText,
       short_description: review.shortDescription,
-      image_url: review.imageUrl,
+      image_url: review.imageUrl || '',
       title: review.title,
     })
     .execute();
   return result;
-
-  // reviews.push(review);
 }
 
 export async function updateReviewById(review: Review) {
@@ -127,13 +107,13 @@ export async function updateReviewById(review: Review) {
     .executeTakeFirstOrThrow();
 
   return result;
-
-  // const reviewIndex = reviews.findIndex((r) => r.reviewId === review.reviewId);
-  // if (reviewIndex >= 0) {
-  //   reviews[reviewIndex] = review;
-  // } else {
-  //   addReview(review);
-  // }
-  // saveReviews();
-  // console.log('review store is now:', reviews);
 }
+
+// const reviewIndex = reviews.findIndex((r) => r.reviewId === review.reviewId);
+// if (reviewIndex >= 0) {
+//   reviews[reviewIndex] = review;
+// } else {
+//   addReview(review);
+// }
+// saveReviews();
+// console.log('review store is now:', reviews);
