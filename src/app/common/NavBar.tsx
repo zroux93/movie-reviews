@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import UserAccountLink from './UserAccountLink';
-// import { currentUser } from "@clerk/nextjs/app-beta";
 import { Suspense } from 'react';
 import Loading from '../loading';
 

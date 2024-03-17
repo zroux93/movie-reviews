@@ -1,7 +1,7 @@
 // "use client";
 
 // import { useSearchParams } from "next/navigation";
-import { SignIn } from "@clerk/nextjs/app-beta/client";
+import { SignIn } from '@clerk/nextjs';
 
 export default function LoginPage() {
   // const searchParams = useSearchParams();

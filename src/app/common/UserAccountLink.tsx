@@ -2,7 +2,7 @@
 // import { useAuth } from "@clerk/nextjs/";
 // import { useRouter } from "next/navigation";
 
-import { UserButton } from "@clerk/nextjs/app-beta";
+import { UserButton } from '@clerk/nextjs';
 
 // import Link from "next/link";
 // import Loading from "../loading";
