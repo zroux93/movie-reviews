@@ -52,27 +52,20 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get the ID and type
-  const { id } = evt.data;
-  const eventType = evt.type;
-
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
-
-  switch (payload.type) {
+  switch (evt.type) {
     case 'user.created':
       payload.data?.username;
 
       addReviewer(
-        `${payload.data?.first_name} ${payload.data?.last_name}`,
-        payload.data?.username,
-        payload.data?.id
+        `${payload.data?.first_name} ${evt.data?.last_name}`,
+        evt.data?.username || '',
+        evt.data?.id
       );
       break;
     case 'user.updated':
       break;
     case 'user.deleted':
-      deleteReviewer(payload.data?.id);
+      deleteReviewer(evt.data?.id || '');
       break;
 
     default:
