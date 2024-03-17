@@ -1,8 +1,7 @@
 import { NewReview, Review } from '@/app/reviews/review';
 import { ReviewSchema, db } from '../database';
 
-type DbReview = Omit<ReviewSchema, 'reviewer_id' | 'review_id'> & {
-  reviewer_id: number;
+type DbReview = Omit<ReviewSchema, 'review_id'> & {
   review_id: number;
 };
 

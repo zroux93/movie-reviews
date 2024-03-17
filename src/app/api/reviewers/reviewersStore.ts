@@ -3,7 +3,7 @@
 import { Reviewer } from '@/app/reviews/review';
 import { db } from '../database';
 
-export async function getReviewerById(id: number) {
+export async function getReviewerById(id: string) {
   const result = await db
     .selectFrom('reviewer')
     .selectAll()
@@ -27,11 +27,17 @@ export async function getReviewerById(id: number) {
   return reviewer;
 }
 
-export async function addReviewer(name: string, username: string) {
+export async function addReviewer(name: string, username: string, id: string) {
   const result = await db
     .insertInto('reviewer')
-    .values({ name: name, username: username })
+    .values({ name: name.trim(), username: username, id: id })
     .execute();
+
+  return result;
+}
+
+export async function deleteReviewer(id: string) {
+  const result = await db.deleteFrom('reviewer').where('id', '=', id).execute();
 
   return result;
 }

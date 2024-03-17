@@ -9,7 +9,7 @@ import {
 import { Review, type NewReview } from './review';
 
 export const createReview = async (data: NewReview) => {
-  await addReview({ ...data, reviewerId: 1, movieId: 1 });
+  await addReview({ ...data, movieId: 1 });
   revalidatePath('/reviews');
 };
 

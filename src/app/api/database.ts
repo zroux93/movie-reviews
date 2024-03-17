@@ -6,7 +6,7 @@ export type ReviewSchema = {
   short_description: string;
   title: string;
   review_id: Generated<number>;
-  reviewer_id: number;
+  reviewer_id: string;
   movie_id: number;
   star_rating: number;
   release_date: string;
@@ -17,7 +17,7 @@ export type ReviewSchema = {
 export type ReviewerSchema = {
   username: string;
   name: string;
-  id: Generated<number>;
+  id: string;
 };
 
 interface Database {

@@ -11,7 +11,7 @@ CREATE TABLE review (
 );
 
 CREATE TABLE reviewer (
-    id serial PRIMARY KEY,
+    id VARCHAR(40),
     name VARCHAR (50),
     username VARCHAR (50)
 );

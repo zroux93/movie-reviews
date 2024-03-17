@@ -8,13 +8,13 @@ export type NewReview = {
   movieId: number;
   reviewText: string;
   starRating: number;
-  reviewerId: number;
+  reviewerId: string;
   releaseDate: string;
   imageUrl?: string;
 };
 
 export type Reviewer = {
-  id: number;
+  id: string;
   name: string;
   username: string;
 };

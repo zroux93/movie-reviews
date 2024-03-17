@@ -1,13 +1,13 @@
-import { authMiddleware } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { authMiddleware } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 // Set the paths that don't require the user to be signed in
-const publicPaths = ["/", "/sign-in*", "/sign-up*"];
+const publicPaths = ['/', '/sign-in*', '/sign-up*'];
 
 const isPublic = (path: string) => {
   return publicPaths.find((x) =>
-    path.match(new RegExp(`^${x}$`.replace("*$", "($|/)")))
+    path.match(new RegExp(`^${x}$`.replace('*$', '($|/)')))
   );
 };
 
@@ -28,7 +28,7 @@ const isPublic = (path: string) => {
 //   return NextResponse.next();
 // });
 
-export default authMiddleware();
+export default authMiddleware({ publicRoutes: ['/api/webhooks(.*)'] });
 
 // export const config = {
 //   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
@@ -46,7 +46,7 @@ export const config = {
      * - public folder
      * - api
      */
-    "/((?!static|.*\\..*|_next|favicon.ico|api).*)",
-    "/",
+    '/((?!static|.*\\..*|_next|favicon.ico|api).*)',
+    '/',
   ],
 };
