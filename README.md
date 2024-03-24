@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Usage
 
-All rights reserved by Zachary Roux.
+All rights reserved by Zachary Roux. This code may not be used for training AI models.
