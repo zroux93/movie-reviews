@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
 type LoadingProps = {
   text?: string;
@@ -12,9 +12,9 @@ export default function Loading({
   inlineText,
 }: LoadingProps) {
   return (
-    <div className={clsx(inlineText && "text-center")}>
-      <div className={clsx("spinner-border", spinnerClassName)} role="status">
-        <span className="sr-only visually-hidden">{text || "Loading..."}</span>
+    <div className={clsx(inlineText && 'text-center')}>
+      <div className={clsx('spinner-border', spinnerClassName)} role="status">
+        <span className="sr-only visually-hidden">{text || 'Loading...'}</span>
       </div>
       {text && <span className="m-2">{text}</span>}
     </div>

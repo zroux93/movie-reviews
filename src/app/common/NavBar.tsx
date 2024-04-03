@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import UserAccountLink from './UserAccountLink';
 import { Suspense } from 'react';
-import Loading from '../loading';
+import Loading from './Loading';
+// import Loading from '../loading';
 
 type NavBarLink = {
   href: string;
